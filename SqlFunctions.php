@@ -23,13 +23,6 @@ class SqlFunctions{
 
     }
 
-    public function validation($value){
-
-        $value = mysqli_real_escape_string($this->conn, trim(stripslashes(strip_tags($value))));
-        return $value;
-
-    }
-
     public function show_rec($tbl_name, $offset, $limit){
 
         $select = "SELECT * FROM $tbl_name LIMIT $offset, $limit";
