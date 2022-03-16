@@ -1,228 +1,75 @@
-<?php
-//importing required functions
-require_once  'SqlFunctions.php';
-$USER_FUN = new SqlFunctions();
-
-// Function responsible to return the correspondant page number
-function pagi_get($page_key, $last_page){
-
-    $page_number = 1;
-    $USER_FUN = new SqlFunctions();
-    //When its a GET method
-    if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        //Check that a page exists
-        if(isset($_GET[$page_key]) && is_numeric($_GET[$page_key]) && !empty(trim($_GET[$page_key]))){
-            $page_number = $USER_FUN->valUSER_IDation($_GET[$page_key]);
-            if($page_number <= 0){
-                $page_number = 1;
-            }
-            elseif($page_number > $last_page){
-                $page_number = $last_page;
-            }
-        }
-        else{
-            $page_number = 1;
-        }
-    }
-    else{
-        $page_number = 1;
-    }
-    return $page_number;
-
-}
-
-function pagi_buttons($buttons){
-
-    if(is_numeric($buttons)){
-        if($buttons >= 3){
-            if($buttons%2){
-                return $buttons; //Odd
-            }
-            else{
-                return false;  //Even
-            }
-        }
-        else{
-            return false;
-        }
-    }
-    else{
-        return false;
-    }
-
-}
-// function that gets all the records within a limit and offset
-function get_records($offset, $limit){
-
-    $USER_FUN = new SqlFunctions();
-
-    $tbl_structure .= <<<END
-        <div class="container">
-        <div class="ins-box ins-box-set">
-            <table class="table table-hover">
-                <thead class="bg-primary" style="color: white !important;">
-                    <tr>
-                        <th scope="col">USER_ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">FirstName</th>
-                        <th scope="col">LastName</th>
-                        <th scope="col">Gender</th>
-                    </tr>
-                </thead>
-                <tbody>
-    END;
-    //fetching from DB from user_Details table
-    $fetch_rec = $USER_FUN->show_rec('user_details', $offset, $limit);
-    // Success response
-    if($fetch_rec){
-        // Looping on the data received and storing them in table_structre
-        foreach($fetch_rec as $rec_data){
-            $tbl_structure .= '<tr ><th scope="row">'.$rec_data['USER_ID'].'</th><td scope="row">'.$rec_data['Username'].'</td><td scope="row">'.$rec_data['FirstName'].'</td><td scope="row">'.$rec_data['LastName'].'</td><td scope="row">'.$rec_data['Gender'].'</td></tr>';
-        }
-    }//Empty return
-    else{
-        $tbl_structure .= '<tr><td colspan="5"><h3>Record not Found</h3></td></tr>';
-    }
-
-    $tbl_structure .= '</tbody></table></div></div>';
-
-    echo $tbl_structure;
-
-}
-// main function
-function pagination(){
-
-    $USER_FUN = new SqlFunctions();
-
-    $total_buttons = pagi_buttons('7');
-    $per_page_records = 15;
-    $total_records = $USER_FUN->rec_count('user_details');
-    $last_page = ceil($total_records/$per_page_records);
-    $page_number = pagi_get('page', $last_page);
-    $half = floor($total_buttons/2);
-
-    $show_page_info = '<div class="container"><div class="ins-box"><h5>Showing Result '.$page_number.' / '.$last_page.' </h5></div></div>';
-
-    echo $show_page_info;
-
-    get_records(($page_number * $per_page_records - $per_page_records), $per_page_records);
-
-    $pagination .= '<div class="container"><nav><ul >';
-
-    if($page_number < $total_buttons && ($last_page == $total_buttons || $last_page > $total_buttons)){
-
-        if($page_number >= 2){
-            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page=1">&lt;&lt;</a></li>';
-            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.($page_number - 1).'">Previous</a></li>';
-        }
-
-        if($page_number >= ($half + 2)){
-
-            for($j=($page_number-$half); $j<=($page_number+$half); $j++){
-
-                if($j == $page_number){
-                    $pagination .= '<li class="page-item active"><span class="page-link">'.$j.'<span class="sr-only">(current)</span></span></li>';
-                }
-                else{
-                    $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$j.'">'.$j.'</a></li>';
-                }
-
-            }
-        }
-        else{
-            for($j=1; $j<=$total_buttons; $j++){
-
-                if($j == $page_number){
-                    $pagination .= '<li class="page-item active "><span class="page-link">'.$j.'<span class="sr-only">(current)</span></span></li>';
-                }
-                else{
-                    $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$j.'">'.$j.'</a></li>';
-                }
-
-            }
-        }
-
-        $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.($page_number + 1).'">Next</a></li>';
-        $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$last_page.'">&gt;&gt;</a></li>';
-    }
-    elseif($page_number >= $total_buttons && $last_page > $total_buttons){
-
-        $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page=1">&lt;&lt;</a></li>';
-        $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.($page_number - 1).'">Previous</a></li>';
-
-        if(($page_number+$half) >= $last_page){
-
-            for($j=($last_page-$total_buttons+1); $j<=$last_page; $j++){
-
-                if($j == $page_number){
-                    $pagination .= '<li class="page-item active"><span class="page-link">'.$j.'<span class="sr-only">(current)</span></span></li>';
-                }
-                else{
-                    $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$j.'">'.$j.'</a></li>';
-                }
-
-            }
-
-        }
-        elseif(($page_number+$half) < $last_page){
-
-            for($j=($page_number-$half); $j<=($page_number+$half); $j++){
-
-                if($j == $page_number){
-                    $pagination .= '<li class="page-item active"><span class="page-link">'.$j.'<span class="sr-only">(current)</span></span></li>';
-                }
-                else{
-                    $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$j.'">'.$j.'</a></li>';
-                }
-
-            }
-        }
-
-        if($page_number != $last_page){
-            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.($page_number + 1).'">Next</a></li>';
-            $pagination .= '<li class="page-item"><a class="page-link" href="index.php?page='.$last_page.'">&gt;&gt;</a></li>';
-        }
-
-    }
-
-    $pagination .= '</ul></nav></div>';
-
-    echo $pagination;
-
-}
-
-
-
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Pagination Example</title>
+	<title> Pagination </title>
 </head>
 
 <body>
+	<form action="upload.php" method="post" enctype="multipart/form-data">
+		Select image to upload:
+		<input type="file" name="selected_image" id="selected_image">
+		<input type="submit" value="Upload Image" name="submit">
+	</form>
+	<?php
+	//Connecting to the MySQL
+	$conn = mysqli_connect('localhost', 'root', '17082015');
+	//Check if connection is good
+	if (!$conn) {
+		die("Connection failed" . mysqli_connect_error());
+	} else {
+		//Selecting 'pagination' database
+		mysqli_select_db($conn, 'pagination');
+	}
 
-    <div class="container-fluUSER_ID">
+	// Determine page number currently visited by user
+	// if null => set page var it to 1
+	if (!isset($_GET['page'])) {
+		$page = 1;
+	} else { // else set page var to the return results
+		$page = $_GET['page'];
+	}
 
-        <div class="container">
-            <ul class="nav justify-content-center bg-primary">
-                <li class="nav-item">
-                    <div class="nav-link heading">PHP Pagination</div>
-                </li>
-            </ul>
-        </div>
+	$images_per_page = 3; //max images per page
+	$images_at_first_page = ($page - 1) * $images_per_page;
 
-        <?php
+	// Query total nb of pages available
+	$query = 'SELECT * FROM `image`';
+	$result = mysqli_query($conn, $query);
+	$nb_of_images = mysqli_num_rows($result); //Total number of images
+	$total_pages = ceil($nb_of_images / $images_per_page); // Total number of pages
 
-            pagination();
+	// retrieve images data and display them
+	// Get the 1st '$images_at_first_page' to '$images_per_page'
+	$query = "SELECT * FROM `image` LIMIT " . $images_at_first_page . ',' . $images_per_page;
+	$result = mysqli_query($conn, $query);
+	//Display the data retrieved
+	while ($row = mysqli_fetch_array($result)) {
+		echo "<img src=" . '"' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '</br>';
+		echo $row['name'] . ' size:' . $row['size'] . '</br>';
+	}
 
-        ?>
 
-    </div>
+	//Displaying hrefs to each page number with prev and nesxt
+
+	if ($page >= 2) {
+		echo "<a href='index.php?page=" . ($page - 1) . "'>  Prev </a>";
+	}
+
+	$page_url = "";
+	for ($i = 1; $i <= $total_pages; $i++) {
+		if ($i == $page) {
+			$page_url .= "<a href='index.php?page=" . $i . "'>" . $i . " </a>";
+		} else {
+			$page_url .= "<a href='index.php?page=" . $i . "'>" . $i . " </a>";
+		}
+	};
+	echo $page_url;
+
+	if ($page < $total_pages) {
+		echo "<a href='index.php?page=" . ($page + 1) . "'>  Next </a>";
+	}
+
+	?>
 </body>
 
 </html>
