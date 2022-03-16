@@ -11,6 +11,8 @@
 		<input type="submit" value="Upload Image" name="submit">
 	</form>
 	<?php
+	// Directory of uploaded photos
+	$upload_dir = "uploads/";
 	//Connecting to the MySQL
 	$conn = mysqli_connect('localhost', 'root', '17082015');
 	//Check if connection is good
@@ -29,7 +31,7 @@
 		$page = $_GET['page'];
 	}
 
-	$images_per_page = 3; //max images per page
+	$images_per_page = 2; //max images per page
 	$images_at_first_page = ($page - 1) * $images_per_page;
 
 	// Query total nb of pages available
@@ -44,8 +46,8 @@
 	$result = mysqli_query($conn, $query);
 	//Display the data retrieved
 	while ($row = mysqli_fetch_array($result)) {
-		echo "<img src=" . '"' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '</br>';
-		echo $row['name'] . ' size:' . $row['size'] . '</br>';
+		echo "<img src=" . '"' . $upload_dir . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '</br>';
+		echo $row['origin'] . ' size:' . $row['size'] . '</br>';
 	}
 
 
