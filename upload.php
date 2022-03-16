@@ -35,14 +35,14 @@
 				VALUES ('$target_image', '$image_type', '$image_size', '$new_image_name');";
 
 				if (mysqli_query($conn, $query)) {
-					echo "New record created successfully";
+					echo "New image recorded to the DB successfully <br/>";
 				} else {
-					echo "Error: " . $query . "<br>";
+					echo "Error: " . $query . "<br/>";
 				}
-				echo "The file " . htmlspecialchars( $target_image ). " has been uploaded.";
+				echo "The image " . htmlspecialchars( $target_image ). " has been uploaded to '" . $target_dir. "'<br/>" ;
 
 			} else {
-				echo "Sorry, there was an error uploading your file.";
+				echo "Oops! Error uploading your image.<br/>";
 			}
 		}
 	}
