@@ -5,7 +5,7 @@
 	$image_type = strtolower(pathinfo($target_image, PATHINFO_EXTENSION));
 	// Switch variable used to check if there is an error
 	$upload_ok = 1;
-	$max_image_size = 3000000;
+	$max_image_size = 3000000;//Byte => 3MB
 	if ($image_size > $max_image_size ) {
 		echo "This image is too large. (Max size permitted is ". $max_image_size . "Kb)";
 		echo '<br/>';
