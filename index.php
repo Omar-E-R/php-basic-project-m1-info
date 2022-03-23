@@ -5,11 +5,6 @@
 </head>
 
 <body>
-	<form action="upload.php" method="post" enctype="multipart/form-data">
-		Select image to upload:
-		<input type="file" name="selected_image" id="selected_image">
-		<input type="submit" value="Upload Image" name="submit">
-	</form>
 	<?php
 	// Directory of uploaded photos
 	$upload_dir = "uploads/";
@@ -42,7 +37,7 @@
 
 	// retrieve images data and display them
 	// Get the 1st '$images_at_first_page' to '$images_per_page'
-	$query = "SELECT * FROM `image` LIMIT " . $images_at_first_page . ',' . $images_per_page;
+	$query = "SELECT * FROM `image` ORDER BY id DESC LIMIT " . $images_at_first_page . ',' . $images_per_page;
 	$result = mysqli_query($conn, $query);
 
 	$i = 0;
@@ -53,12 +48,12 @@
 	echo "<tr>";
 	//Display the data retrieved in a table
 	while ($row = mysqli_fetch_array($result)) {
-		$i=$i+1;
+		$i = $i + 1;
 		echo "<td>";
-		echo "<img src=" . '"' . $upload_dir . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '<br>';
+		echo "<img src=" . '"' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '<br>';
 		echo $row['origin'] . ' size:' . $row['size'] . '<br>';
-		echo"</td>";
-		if ($i % $images_per_raw == 0){
+		echo "</td>";
+		if ($i % $images_per_raw == 0) {
 			echo "</tr>";
 		}
 	}
@@ -90,6 +85,11 @@
 	}
 
 	?>
+	<form style="text-align: center; " action="upload.php" method="post" enctype="multipart/form-data">
+		Select image to upload:
+		<input type="file" name="selected_image" id="selected_image">
+		<input type="submit" value="Upload Image" name="submit">
+	</form>
 </body>
 
 </html>
