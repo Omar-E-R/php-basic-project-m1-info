@@ -61,14 +61,14 @@ function explorerDir($path)
 					//Selecting 'pagination' database
 					mysqli_select_db($conn, 'pagination');
 				}
-
+				$table_name = "";
 				if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg"){
-					$query = "INSERT INTO `none_image_file` (`origin`, `type`, `size`, `name`)
-					VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
+					$table_name = "none_image_file";
 				}else{
-					$query = "INSERT INTO `image` (`origin`, `type`, `size`, `name`)
-					VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
+					$table_name = "image";
 				}
+				$query = "INSERT INTO `$table_name` (`origin`, `type`, `size`, `name`)
+				VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
 
 			if (mysqli_query($conn, $query)) {
 				echo "File Recorded: ". $entree . "<br>";
