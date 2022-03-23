@@ -47,9 +47,9 @@ function explorerDir($path)
 			{
 				// if entry is a file we append the entry to path in $path_source
 				$path_source = $path."/".$entree;
-
-				$image_type = filetype($path_source);
-				$image_size = filesize($path_source);
+				// Get file type and size
+				$file_type = pathinfo($path_source, PATHINFO_EXTENSION);
+				$file_size = filesize($path_source);
 				//Connecting to MySQL
 				$conn = mysqli_connect('localhost', 'root',
 					'17082015'
@@ -62,8 +62,13 @@ function explorerDir($path)
 					mysqli_select_db($conn, 'pagination');
 				}
 
-				$query = "INSERT INTO `image` (`origin`, `type`, `size`, `name`)
-				VALUES ('$entree', '$image_type', '$image_size', '$path_source');";
+				if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg"){
+					$query = "INSERT INTO `none_file_file` (`origin`, `type`, `size`, `name`)
+					VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
+				}else{
+					$query = "INSERT INTO `image` (`origin`, `type`, `size`, `name`)
+					VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
+				}
 
 			if (mysqli_query($conn, $query)) {
 				echo "File Recorded: ". $entree . "<br>";
