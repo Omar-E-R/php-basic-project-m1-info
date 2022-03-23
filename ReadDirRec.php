@@ -63,7 +63,7 @@ function explorerDir($path)
 				}
 
 				if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg"){
-					$query = "INSERT INTO `none_file_file` (`origin`, `type`, `size`, `name`)
+					$query = "INSERT INTO `none_image_file` (`origin`, `type`, `size`, `name`)
 					VALUES ('$entree', '$file_type', '$file_size', '$path_source');";
 				}else{
 					$query = "INSERT INTO `image` (`origin`, `type`, `size`, `name`)
