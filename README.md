@@ -1,6 +1,9 @@
 # pagination-php-basic
 
 ## A Simple example of a pagination using PHP and MySQLi
+- To upload photos and see other photos, visit the main page at `localhost:8000/index.php`
+- To upload all photos from `docs/` directory visit this page `localhost:8000/ReadDirRec.php`
+- To have admin access and delete some of the photos uploaded visit this page `localhost:8000/admin/index.php`
 
 ### Here we can see the admin page
 ![screenshot](screenshot.png)
