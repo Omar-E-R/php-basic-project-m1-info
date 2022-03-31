@@ -2,6 +2,27 @@
 
 <head>
 	<title> Pagination </title>
+	<style>
+		.img-frame-cap {
+			width: 333px;
+			background: #fff;
+			padding: 18px 18px 2px 18px;
+			border: 1px solid #999;
+			text-align: center;
+			display: block;
+		}
+
+		.caption {
+			text-align: center;
+			margin-top: 4px;
+			font-size: 12px;
+		}
+
+		.center {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
 </head>
 
 <body>
@@ -56,16 +77,20 @@
 	$images_per_raw = 2;
 
 	// Start of table
-	echo "<table>";
+	echo "<table class='center'>";
 	echo "<tr>";
 	//Display the data retrieved in a table
 	while ($row = mysqli_fetch_array($result)) {
 		$i = $i + 1;
-		echo "<td>";
-		echo "<img src=" . '"../' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '<br>';
-		echo 'Name: ' . $row['origin'];
-		echo "<br>";
-		echo "<a style='text-align: center;' href='?id=" , $row['origin'], "'>Delete </a>";
+		echo '<td>';
+		echo "<div class='img-frame-cap'>";
+		echo "<img src=" . '"../' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 333px;"' . ">" . '<br>';
+		echo "<div classe='caption'>";
+		echo $row['origin'] . "</div>";
+		echo "<div style='text-align: center;'>";
+		echo "<a href='?id=", $row['origin'], "'>Delete </a>" . "</div>";
+		echo "</div>";
+
 		echo "</td>";
 		if ($i % $images_per_raw == 0) {
 			echo "</tr>";
@@ -79,7 +104,7 @@
 
 
 	//Displaying hrefs to each page number with prev and nesxt
-
+	echo "<div style='text-align: center;'>";
 	if ($page >= 2) {
 		echo "<a href='index.php?page=" . ($page - 1) . "'>  Prev </a>";
 	}
@@ -97,7 +122,7 @@
 	if ($page < $total_pages) {
 		echo "<a href='index.php?page=" . ($page + 1) . "'>  Next </a>";
 	}
-
+	echo "</div>";
 	?>
 	<form style="text-align: center; " action="upload.php" method="post" enctype="multipart/form-data">
 		Select image to upload:
