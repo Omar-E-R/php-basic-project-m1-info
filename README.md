@@ -1,4 +1,4 @@
-# pagination-php-basic
+# php-basic project
 
 ## A Simple example of a pagination using PHP and MySQLi
 - To upload photos and see other photos, visit the main page at `localhost:8000/index.php`
