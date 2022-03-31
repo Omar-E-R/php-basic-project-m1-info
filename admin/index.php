@@ -7,7 +7,7 @@
 <body>
 	<?php
 	// Directory of uploaded photos
-	$upload_dir = "uploads/";
+	$upload_dir = "../uploads/";
 
 	$db_name = 'php_project';
 
@@ -20,6 +20,15 @@
 		//Selecting $db_name database
 		mysqli_select_db($conn, $db_name);
 	}
+
+	// Handle DELETE
+	// collect value of input field
+	if (isset($_GET['id'])) {
+		$id_to_delete = $_GET['id'];
+		$result = mysqli_query($conn, "DELETE FROM `image` WHERE origin = '$id_to_delete'");
+		header("Location: index.php", TRUE, 301);
+	}
+
 
 	// Determine page number currently visited by user
 	// if null => set page var it to 1
@@ -53,8 +62,10 @@
 	while ($row = mysqli_fetch_array($result)) {
 		$i = $i + 1;
 		echo "<td>";
-		echo "<img src=" . '"' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '<br>';
-		echo $row['origin'] . ' size:' . $row['size'] . '<br>';
+		echo "<img src=" . '"../' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 263px;"' . ">" . '<br>';
+		echo 'Name: ' . $row['origin'];
+		echo "<br>";
+		echo "<a style='text-align: center;' href='?id=" , $row['origin'], "'>Delete </a>";
 		echo "</td>";
 		if ($i % $images_per_raw == 0) {
 			echo "</tr>";

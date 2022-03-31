@@ -5,7 +5,6 @@
 <?php echo " ", date ("h:i:s"); ?>
 </P>
 <?php
-
 // Limits the maximum execution time to 500sec
 set_time_limit (500);
 $path= "docs";
@@ -17,6 +16,8 @@ explorerDir($path);
 
 function explorerDir($path)
 {
+	$db_name = 'php_project';
+
 	// Open current folder and handle it to $folder
 	$folder = opendir($path);
 
@@ -58,8 +59,8 @@ function explorerDir($path)
 				if (!$conn) {
 					die("Connection failed" . mysqli_connect_error());
 				} else {
-					//Selecting 'pagination' database
-					mysqli_select_db($conn, 'pagination');
+					//Selecting $db_name database
+					mysqli_select_db($conn, $db_name);
 				}
 				$table_name = "";
 				if ($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg"){
