@@ -1,5 +1,5 @@
 <?php
-
+$db_name = 'php_project';
 $target_dir = "uploads/";
 $target_image = $_FILES["selected_image"]["name"];
 $image_size = $_FILES['selected_image']['size'];
@@ -27,7 +27,7 @@ if (isset($target_image)) {
 		echo "Error, your image was not uploaded.";
 	} else { // if everything is ok, try to upload file
 		$conn = mysqli_connect('localhost', 'root', '17082015');
-		mysqli_select_db($conn, 'pagination');
+		mysqli_select_db($conn, $db_name);
 		$query = 'SELECT * FROM `image`';
 		$result = mysqli_query($conn, $query);
 		$nb_of_images = mysqli_num_rows($result) + 1;
