@@ -75,7 +75,7 @@
 		$i = $i + 1;
 		echo '<td>';
 		echo "<div class='img-frame-cap'>";
-		echo "<img src=" . '"../' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 333px;"' . ">" . '<br>';
+		echo "<img src=" . '"../' . $row['name'] . '" alt="'.$row['name']. '" title="' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 333px;"' . ">" . '<br>';
 		echo "<div classe='caption'>";
 		echo $row['origin'] . "</div>";
 
