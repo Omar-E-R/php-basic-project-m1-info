@@ -9,6 +9,11 @@
 set_time_limit (500);
 $path= "docs";
 
+echo "<br> Display Folders tree: <br>";
+
+listFolderFiles($path);
+
+echo "<br> Display explorerDir steps of execution: <br>";
 echo "Directory: " . $path . "<br>" . "<br>";
 
 //Execute the function on docs folder
@@ -81,6 +86,28 @@ function explorerDir($path)
 	}
 	closedir($folder);
 }
+
+function listFolderFiles($path)
+{
+	$array_paths = scandir($path);
+
+	unset($array_paths[array_search('.', $array_paths, true)]);
+	unset($array_paths[array_search('..', $array_paths, true)]);
+
+	// prevent empty ordered elements
+	if (count($array_paths) < 1)
+		return;
+
+	echo '<ol>';
+	foreach ($array_paths as $var) {
+		echo '<li>' . $var;
+		if (is_dir($path . '/' . $var)) listFolderFiles($path . '/' . $var);
+		echo '</li>';
+	}
+	echo '</ol>';
+}
+
+listFolderFiles('Main Dir');
 ?>
 <P>
 <B>FINNNNNN DU PROCESSUS :</B>
