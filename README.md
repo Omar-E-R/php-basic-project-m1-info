@@ -10,41 +10,41 @@
 ### 1 - PAGINATION
 
 - Here you can see the first page of pagination (Images are sorted in order of recent)
-> ![](/home/omar/Pictures/Pagination_1.png)
+> ![](Pagination_1.png)
 
 - Here you can see the second page and how you have a `Prev` and `Next` buttons.
-> ![''](/home/omar/Pictures/Pagination_2.png)
+> ![](Pagination_2.png)
 
 ### 2 - UPLOAD
 - Here you can see the upload page with only one page uploaded
-> ![]()![Upload_1](/home/omar/workspace/M2/php/PHP-Pagination/Upload_1.png)
+> ![](Upload_1.png)
 
 - Here you can see the choosing menu and image selection
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Upload_2.png)
+> ![](Upload_2.png)
 
 - Here you can see the image after being uploaded and displayed first in order
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Upload_3.png)
+> ![](Upload_3.png)
 
 ### 3 - RECURSIVE FOLDER READING
 
 - Here you can see the tree of the folder that the function have read
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Lecture_recursive_1.png)
+> ![](Lecture_recursive_1.png)
 
 - Here you can understande how the recursive function works
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Lecture_recursive_2.png)
+> ![](Lecture_recursive_2.png)
 
 ### 4 - VIEWING PHOTOS FROM FOLDERS
 
 - Here you can see all the photos from folder, and by hovering the mouse on the image, you get a zoomed view and the path of the image:
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Dossier_chargement_2.png)
+> ![](Dossier_chargement_2.png)
 
 ### 5 - ADMIN PAGE WITH DELETE FEATURE
 
 - Here you can see the admin page with the delete button
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Delete_1.png)
+> ![](Delete_1.png)
 
 - Here you can see how after the second image from the to row has been deleted
-> ![](/home/omar/workspace/M2/php/PHP-Pagination/Delete_2.png)
+> ![](Delete_2.png)
 
 ### Files:
 
