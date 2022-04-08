@@ -10,28 +10,28 @@
 ### 1 - PAGINATION
 
 - Here you can see the first page of pagination (Images are sorted in order of recent)
-> ![](Pagination_1.png)
+> ![](tp1-screenshot1.png)
 
 - Here you can see the second page and how you have a `Prev` and `Next` buttons.
-> ![](Pagination_2.png)
+> ![](tp1-screenshot2.png)
 
 ### 2 - UPLOAD
 - Here you can see the upload page with only one page uploaded
-> ![](Upload_1.png)
+> ![](tp2-screenshot1.png)
 
 - Here you can see the choosing menu and image selection
-> ![](Upload_2.png)
+> ![](tp2-screenshot2.png)
 
 - Here you can see the image after being uploaded and displayed first in order
-> ![](Upload_3.png)
+> ![](tp2-screenshot3.png)
 
 ### 3 - RECURSIVE FOLDER READING
 
 - Here you can see the tree of the folder that the function have read
-> ![](Lecture_recursive_1.png)
+> ![](tp3-screenshot1.png)
 
 - Here you can understande how the recursive function works
-> ![](Lecture_recursive_2.png)
+> ![](tp3-screenshot2.png)
 
 ### 4 - VIEWING PHOTOS FROM FOLDERS
 
@@ -41,10 +41,10 @@
 ### 5 - ADMIN PAGE WITH DELETE FEATURE
 
 - Here you can see the admin page with the delete button
-> ![](Delete_1.png)
+> ![](tp4-screenshot1.png)
 
 - Here you can see how after the second image from the to row has been deleted
-> ![](Delete_2.png)
+> ![](tp4-screenshot2.png)
 
 ### Files:
 
