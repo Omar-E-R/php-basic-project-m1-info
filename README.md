@@ -36,7 +36,7 @@
 ### 4 - VIEWING PHOTOS FROM FOLDERS
 
 - Here you can see all the photos from folder, and by hovering the mouse on the image, you get a zoomed view and the path of the image:
-> ![](Dossier_chargement_2.png)
+> ![](tp3-screenshot3.png)
 
 ### 5 - ADMIN PAGE WITH DELETE FEATURE
 
