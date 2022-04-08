@@ -3,6 +3,12 @@
 <head>
 	<title> Pagination </title>
 	<style>
+
+		.zoom:hover {
+			transform: scale(1.5);
+			/* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+		}
+
 		.img-frame-cap {
 			width: 333px;
 			background: #fff;
@@ -84,9 +90,11 @@
 		$i = $i + 1;
 		echo '<td>';
 		echo "<div class='img-frame-cap'>";
+		echo '<div class="zoom">';
 		echo "<img src=" . '"../' . $row['name'] . '" alt="' . $row['name'] . '" title="' . $row['name'] . '" style="height:271px; max-height: 336px; max-width:336px; width: 333px;"' . ">" . '<br>';
+		echo "</div>";
 		echo "<div classe='caption'>";
-		echo $row['origin'] . "</div>";
+		echo $row['origin'] . "<br>" . $row['size'] . " octets" . "</div>";
 		echo "<div style='text-align: center;'>";
 		echo "<a href='?id=", $row['origin'], "'>Delete </a>" . "</div>";
 		echo "</div>";
